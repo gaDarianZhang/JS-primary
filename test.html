@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test</title>
+    <style>
+        .box2{
+            width: 500px;
+            height: 500px;
+            border: 1px solid red;
+            text-align: center;
+            line-height: 500px;
+        }
+        img{
+            width: 300px;
+            height: 200px;
+            vertical-align: middle;/*不加vertical-align的话，会因为基线问题造成不居中*/
+        }
+        .box2{
+            font-size: 300px;
+        }
+        /* span{
+           vertical-align: middle;
+        } */
+        .box3{
+            width: 500px;
+            height: 500px;
+            border: solid 1px red;
+            overflow: hidden;
+        }
+        .box4{
+            width: 300px;
+            height: 300px;
+            background-color: #bbffaa;
+        }
+        .box5{
+            width: 600px;
+            height: 200px;
+            background-color: deepskyblue;
+        }
+    </style>
+</head>
+<body>
+    <div class="box"><img src="13day/9.jpg"></div>
+    <div class="box2"><span>居</span></div>
+    <div class="box3">
+        <div class="box4">
+            <div class="box5"></div>
+        </div>
+    </div>
+    <script>
+        var obj1 = {
+            name:"zhangsan",
+            age:12
+        };
+
+        var obj_arr = [
+            {name:"hanha",age:34},
+            {name:"laji",age:21},
+            {name:'sisi',gender:"female"}
+        ];
+        var strobj = JSON.stringify(obj1);
+        console.log(strobj,typeof strobj);
+
+        var strobjarr = JSON.stringify(obj_arr);
+        console.log(strobjarr);
+
+        console.log(JSON.parse(strobj),typeof JSON.parse(strobj) );
+        var date = new Date();
+        console.log(date.getTimezoneOffset());
+        console.log(undefined==false);//false
+        console.log(Boolean(" "));
+    </script>
+</body>
+</html>

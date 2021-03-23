@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    //单次定时器 即延迟定时器
+    // setTimeout()是延迟定时器，是window下的一个全局方法，有两个参数
+    // 第一个：回调函数，也就是到时间了要干啥
+    // 第二个：时间，单位是ms
+    //发现定时器返回的是一个数字，按照定时器初始化的顺序开始，1，2，3，。。。。。
+    // console.log(setTimeout(function () {
+    //     alert('时间到了1');
+    // },5000));
+    // console.log(setTimeout(function () {
+    //     alert('时间到了2');
+    // },5000));
+    var timer1 = setTimeout(function () {
+        alert("时间到了1");
+    },5000);
+
+
+    //前面有定时器，但是这句并没有等到定时结束才执行，而是直接顺序执行下来了，说明定时器是一个异步操作；
+    //如果是同步，则是等定时器结束后才执行后边的内容.
+    console.log(1);
+    console.log(timer1,typeof timer1);
+
+    //这样的话就直接顺序执行到这里了，还没等到设定的时间，定时器就被清除了
+    //所以，一般会搞一个按钮之类的，点了按钮再清楚
+    console.log(clearTimeout(timer1));
+
+</script>
+</body>
+</html>

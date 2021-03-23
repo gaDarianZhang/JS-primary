@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<input type="button" value="点击绑定事件">
+<input type="button" value="点击解绑事件">
+
+<script>
+    //dom0事件不能给同一个元素添加同种事件多次，如果添加多次就会产生覆盖
+    var btns = document.querySelectorAll('input');
+    btns[0].onclick = function () {
+        console.log('点了一次');//如果不解绑这个onclick事件，一直点这个按钮，就会一直执行这个函数
+    }
+    btns[0].onclick = function () {
+        console.log('我要覆盖了');//如果不解绑这个onclick事件，一直点这个按钮，就会一直执行这个函数
+    }
+    // btns[1].onclick = function () {
+    //     btns[0].onclick = null;//就是把这个onclick属性给重新赋值，去除绑定的函数
+    // }
+    //回调函数也可以换一种写法
+    btns[1].onclick = fuc;//!!!!!!!!!!!!!!!!!!!!这里不能加括号，用作回调函数不加括号!!!!!!!!!!!!!
+    function fuc() {
+        btns[0].onclick = null;//!!!!!!!!!!!!!!!!!!!!!!!!!!!!dom0的解绑方式就是把事件响应函数改为null!!!!!!!!!!!!!!!!!!!!!!!
+    }
+</script>
+</body>
+</html>

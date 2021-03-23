@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        img{
+            width: 100px;
+            height: 100px;
+            position: absolute;
+            left: 0;
+            top: 0;
+        }
+    </style>
+</head>
+<body>
+<img src="9.jpg">
+<script>
+    var imgNode = document.querySelector('img');
+    // console.log(imgNode);
+    document.onmousemove = function (event) {
+        event = event || window.event;
+        var left = event.clientX;
+        var top = event.clientY;
+        imgNode.style.left = left + 'px';
+        imgNode.style.top = top + 'px';
+        console.log('鼠标在移动');
+    }
+</script>
+</body>
+</html>

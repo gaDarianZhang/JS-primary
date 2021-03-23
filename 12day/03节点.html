@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="box" class="">
+    <p>第一个段落</p>
+    <p>第二个段落</p>
+</div>
+<script>
+    var box = document.getElementById('box');
+    console.log(box.childNodes);
+    // NodeList(5)
+    // 0: text------>div和p之间的空白算作文本
+    // 1: p--------->第一个p
+    // 2: text------>第一个p和第二个p之间的空白算作文本
+    // 3: p--------->第二个p，并没有算p内的文本，p内的文本是p的childNode
+    // 4: text------>第二个p和div结束符间的空白算作文本
+    // length: 5
+
+    for (var i=0;i<box.childNodes.length;i++){
+        var childNode = box.childNodes[i];
+        console.log(childNode,childNode.nodeName,childNode.nodeType,childNode.nodeValue);
+        //!!!!!!一共有12中node节点，每一种节点都对应一个特定的nodeType!!!!!!!!!!
+        if(childNode.nodeType==1){
+            console.log("元素节点：",childNode);
+        }
+    }
+//几种特殊元素节点的拿法
+//    直接拿html节点
+    var htmlNode = document.documentElement;//!!!!!!!!!!!!!!!!!!!!!!!!
+    console.log("看看是不是html节点:",htmlNode);
+//    直接拿body标签
+    var bodyNode = document.body;
+    console.log("看看是不是body节点：",bodyNode);
+//    直接拿head标签
+    var headNode = document.head;
+    console.log("看看是不是head节点：",headNode);
+
+    console.log(htmlNode.childNodes);
+//    html节点拿到的不包含开头和结尾的两个文本节点，但我们自己在body中写的子元素会带上第一个和最后一个文本节点
+</script>
+</body>
+</html>

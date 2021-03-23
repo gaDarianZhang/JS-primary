@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<ul class="list">
+    <li id="first">1</li>
+    <li id="second">2</li>
+    <li id="third">3</li>
+    <li id="forth">4</li>
+    <li id="fifth">5</li>
+</ul>
+<script>
+    //！！！！！！！父元素中追加新元素
+    // var ulNode = document.body.firstElementChild;//为了复习一下，通过父元素拿到子元素
+    // // var ulNode = document.querySelector('.list');
+    // var liNode = document.createElement('li');
+    // liNode.innerText = '6';
+    // liNode.setAttribute('id','sixth');
+    // ulNode.appendChild(liNode);
+    // console.log(ulNode);
+
+    //添加兄弟节点
+    // var ulNode = document.getElementsByClassName('list')[0];
+    // console.log(ulNode);
+    // var liNode = document.createElement('li');
+    // liNode.setAttribute('id','two-five');//插在3之前
+    // liNode.innerText = '2.5';
+    // var thirdNode = document.querySelector('.list li:nth-child(3)');//获取第三个节点,'.list :nth-child(3)'甚至可以不要li
+    // console.log(thirdNode);
+    // ulNode.insertBefore(liNode,thirdNode);//!!!!!!!!!!!!!!添加兄弟元素的时候还是要用到父元素！！！！！！！！！！！
+    // console.log(ulNode);
+
+    //节点替换
+    // var ulNode = document.querySelector('.list');
+    // var secNode = document.querySelector('.list :nth-child(2)');
+    // var newSec = document.createElement('li');
+    // newSec.innerText = 'new 2';
+    // ulNode.replaceChild(newSec,secNode);
+    // console.log(ulNode);
+
+    //节点删除
+    // var ulNode = document.getElementsByTagName('ul')[0];
+    // console.log(ulNode);
+    // var deleNode = ulNode.lastElementChild;
+    // console.log(deleNode);
+    // ulNode.removeChild(deleNode);
+
+    //或者直接删除节点
+    var deleNode = document.querySelector('.list li:last-of-type');
+    console.log(deleNode);
+    deleNode.remove();
+
+</script>
+</body>
+</html>

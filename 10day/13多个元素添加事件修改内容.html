@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        p{
+            background-color: hotpink;
+        }
+        h1{
+            visibility: hidden;
+        }
+    </style>
+</head>
+<body>
+    <p>1</p>
+    <p>2</p>
+    <p>3</p>
+    <p>4</p>
+    <div class="box">
+        divbox
+        boxdiv
+        <span>spancontent</span>
+    </div>
+    <h1>
+        h1隐藏
+    </h1>
+    <!-- <h1></h1> -->
+    <script>
+        window.onload = function(){
+            var pList = document.getElementsByTagName('p');
+            for(var i = 0; i<pList.length; i++){
+                pList[i].onclick = function(){
+                    for(var j=0; j<pList.length; j++){
+                        pList[j].innerHTML = 'innerHTML';
+                        // pList[j].innerText = 'innerText';
+                        // pList[j].textContent = 'textContent';
+                        // 这三个有区别：
+                        pList[j].innerHTML = '<h2>innerHTML</h2>';//！！！！！！标签生效
+                        pList[j].innerText = '<h2>innerText</h2>';//！！！！！！标签不会生效
+                        
+
+                    }
+                }
+            }
+        }
+
+        var box = document.querySelector('.box');
+        console.log(box);
+        console.log('innerHTML读',box.innerHTML);
+        console.log('innerText读',box.innerText);
+        // innerHTML和innerText区别！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！
+        //设置内容时：如果内容当中包含标签字符串，innerHTML会有标签的特性，也就是让标签生效。innerText不会让标签生效。
+        //读取内容时：如果标签内部还包含了其他标签，innerHTML会把标签内部带着其他的标签全部输出（也就是把标签页当做文本输出）；
+        //                                        但innerText只会输出所有标签里面的内容或文本，不会输出标签
+        // 如果标签内部没有其他标签，他们两个一致，都是读取文本内容，innerHTML会保留空白和换行
+
+        var h = document.querySelector('h1');
+        console.log(h.textContent);
+        console.log(h.innerText);
+        console.log(h.innerHTML);
+        // innerHTML 和textContent能获取hidden的内容，innerText不能获得。
+        
+    </script>
+</body>
+</html>

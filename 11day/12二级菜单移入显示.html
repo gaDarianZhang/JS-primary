@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        ul,li{
+            list-style: none;
+        }
+        a{
+            text-decoration: none;
+        }
+        .clearfix{
+            content: '';
+            display: table;
+            clear: both;
+        }
+        .navList{
+            width: 100px;
+            height: 150px;
+            /*box-sizing: border-box;*/
+            background-color: #bbffaa;
+            /*padding: 10px;*/
+            position: relative;
+            border-top: 1px solid red;
+            margin: 50px auto;
+        }
+        .navList>li{
+            width: 100px;
+            height: 50px;
+            text-align: center;
+            line-height: 49px;
+            border-bottom: 1px solid red;
+            box-sizing: border-box;
+        }
+        .navList>li a{
+            /*vertical-align: middle;*/
+            /*vertical-align: center;*/
+        }
+        .navList>li .navIn{
+            width: 200px;
+            height: 300px;
+            background-color: skyblue;
+            position: absolute;
+            left: 100px;
+            top: -1px;
+            opacity: .3;
+            display: none;
+        }
+        .navList>li .navIn li{
+            width: 200px;
+            height: 100px;
+            text-align: center;
+            line-height: 100px;
+        }
+
+    </style>
+</head>
+<body>
+<ul class="navList">
+    <li>
+        <a href="javascript:;">服装</a>
+        <ul class="navIn">
+            <li>衣服</li>
+            <li>鞋子</li>
+            <li>袜子</li>
+        </ul>
+    </li>
+    <li>
+        <a href="javascript:;">水果</a>
+        <ul class="navIn">
+            <li>香蕉</li>
+            <li>苹果</li>
+            <li>菠萝</li>
+        </ul>
+    </li>
+    <li>
+        <a href="javascript:;">家电</a>
+        <ul class="navIn">
+            <li>冰箱</li>
+            <li>电视</li>
+            <li>洗衣机</li>
+        </ul>
+    </li>
+</ul>
+<script>
+    var navList = document.querySelectorAll('.navList>li');
+    var navInList = document.querySelectorAll('.navList>li .navIn');
+    // console.log(navInList);
+    for (var i=0;i<navList.length;i++){
+        navList[i].index = i;
+        navList[i].onmouseenter = function (){
+            for(var j=0;j<navInList.length;j++){
+                navInList[j].style.display = 'none';
+            }
+            navInList[this.index].style.display = 'block';
+        }
+        navList[i].onmouseleave = function (){
+            navInList[this.index].style.display = 'none';
+        }
+    }
+</script>
+</body>
+</html>

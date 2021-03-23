@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<script type="text/javascript">
+			var dataTest = {
+				name:'赵丽颖',
+				age:32
+			}
+			
+			var dataTestArr = [{name:'赵丽颖',age:32},{name:'杨幂',age:33},{name:'热巴',age:28}]
+			
+			var data2dArray = [[1,2],[3,4]];
+			
+			//把对象json化  字符串化
+			
+			var dataStr = JSON.stringify(dataTest);
+			console.log(dataStr);
+			
+			var dataStr = JSON.stringify(dataTestArr);
+			console.log(dataStr);
+			console.log(dataStr[2]);
+			console.log(typeof dataStr);
+			
+			var data = JSON.parse(dataStr);
+			console.log(data);
+			
+			
+			var str = JSON.stringify(data2dArray);
+			console.log(str[3]);
+			data2dArray = [[{name:"zhang",age:12}],[{gender:"nan",classid:1}]];
+			str = JSON.stringify(data2dArray);
+			console.log(str);
+			
+		</script>
+	</body>
+</html>

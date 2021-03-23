@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div class="box"></div>
+<script>
+    //封装函数，实现对一个对象设置或者读取值
+    function setOrGetContent(obj, contnet) {
+        if (arguments.length == 2){
+            //设置值
+            if (obj.textContent){//没考虑到如果本来就是空的
+            //    说明是高级浏览器
+                console.log(obj.textContent);
+                obj.textContent = contnet;
+            }
+            else{
+                //低级浏览器
+                console.log('这是设置值，跑到了else里边');
+                console.log(obj.textContent);
+                console.log(obj.textContent=='');
+                obj.innerText = contnet;
+            }
+        }
+        else{
+            //读取值
+            var result = '';
+            if (obj.textContent){
+                //高级浏览器
+                alert('高级')
+                result = obj.textContent;
+            }
+            else{
+                //低级浏览器
+                result = obj.innerText;
+            }
+            return result;
+        }
+    }
+    var box = document.querySelector('div');
+    setOrGetContent(box,'set')
+    console.log(setOrGetContent(box));
+</script>
+</body>
+</html>

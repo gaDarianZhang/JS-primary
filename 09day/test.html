@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    var str = 'abc';
+    console.log(str);
+
+    //自动转化为包装对象
+    //包装对象形式：String {
+    //   0: "a", 1: "b", 2: "c", length: 3, [[PrimitiveValue]]: "abc"
+    // }
+    console.log(Object.keys(str));//数组["0","1","2"]
+    console.log(str[1]);
+
+    var strObj = new String(str);
+    console.log(strObj);
+
+    strObj.x = 'x';//自己添加属性
+    console.log(strObj);
+
+</script>
+</body>
+</html>

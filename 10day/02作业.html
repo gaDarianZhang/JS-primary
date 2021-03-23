@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <script type="text/javascript">
+        function HuaWeiMobile(name,color,size,money){
+            this.name = name;
+            this.color = color;
+            this.size = size;
+            this.money = money;
+        }
+
+        HuaWeiMobile.prototype.brand = '华为';
+        HuaWeiMobile.prototype.callPhone = function(){
+            console.log('打电话!');
+        };
+        HuaWeiMobile.prototype.photo = function(){
+            console.log('可以自拍！');
+        }
+        HuaWeiMobile.prototype.playMusic = function(){
+            console.log('可以听音乐！');
+        }
+
+
+        var phone1 = new HuaWeiMobile('p30','skyblue',6.3,4000);
+        phone1.playMusic();
+        phone1.__proto__.photo();
+        console.dir(HuaWeiMobile);
+
+    //    字符串反转
+        var str = "wodigemamamiya;sdkfas12";
+        var arr = str.split('');
+        console.log(arr);
+        arr.reverse();
+        strr = arr.join('')
+        console.log(strr);
+
+
+
+    //    打印字符串中出现最多的字符的次数和索引位置
+        var str = 'abcdefgedcbdawerrewighfabcdd';
+        var obj = {};
+        console.log(undefined==false);//false
+        //虽然undefined!=false,但是在if语句内,undefined是false
+        // console.log(obj.dd);
+        // if (!undefined){
+        //     console.log('undefined false');
+        // }
+        // else if(undefined){
+        //     console.log('undefined true');
+        // }
+
+        for(var i = 0;i < str.length;i++){
+            charS = str[i];
+            // console.log(obj[charS]);
+            obj[charS]?obj[charS]++:obj[charS]=1;
+            obj[charS+'Index']?obj[charS+'Index'].push(i):obj[charS+'Index']=[i];
+        }
+        max=0
+        charNum = {}
+        for (key in obj){
+            if(typeof obj[key] == 'number'){
+                if(obj[key]>max){
+                    max=obj[key];
+                    charNum={};
+                    charNum.num = max;
+                    charNum[key] = obj[key+'Index'];
+                }
+                else if(obj[key]==max){
+                    charNum[key] = obj[key+'Index'];
+                }
+            }
+        }
+        console.log(obj);
+        console.log(charNum);
+
+
+
+    </script>
+
+</body>
+</html>

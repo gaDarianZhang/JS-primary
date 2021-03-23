@@ -1,0 +1,27 @@
+ <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    var str = 'dsjkfsjdgoiogjndsfiofnoifiieefbmkml,cla';
+
+    //正则的创建方式
+    //字面量
+    var patt = /\d/;
+    var result = patt.test(str);//test  使用正则对象规则去字符串当中检测是否包含符合规则的字符串；
+    console.log(result);
+
+    console.log('\d');
+    //构造函数
+    var patt1 = new RegExp('\\d');
+    var result1 = patt1.test(str);
+    console.log(result1);
+
+    console.log(/\d{2,}/.test('dsjkf1sdkgds2kdlg'));
+
+</script>
+</body>
+</html>

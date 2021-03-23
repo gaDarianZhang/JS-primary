@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>dhou</title>
+	</head>
+	<body>
+		<script type="text/javascript">
+			var a = '123.3';
+			a = '123sdfjgs';
+			a = 'adusyg123';//NaN
+			a = 'sdagya123fasjd';//NaN
+			a = '123..1234.56dsgdfgsdf';
+			a = '123.123.123adfasfsdf'
+			// a = '';//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!NaN NaN
+			// a = '   ';//!!!!!!!!!!!!!!!!!!!!!!!!!!!NaN NaN
+			console.log(Number('.123'));//0.123
+			console.log(parseInt(a))
+			console.log(parseFloat(a))
+			// ！！！！！！！！！！！！！！！！！！！！！！！
+			//从字符串当中提取整数,这个字符串必须以数字开头，否则NaN;
+			//从字符串当中提取浮点数（小数）这个字符串必须以数字开头，否则NaN;
+			
+			
+		</script>
+	</body>
+</html>

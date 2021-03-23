@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>不同类型的数值运算和比较</title>
+</head>
+
+<body>
+	<script>
+		// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+		// 特殊情况：空串/空白串和null不相等;false和null不相等;0和null不相等;undefined 和 null 相等==true ，===false；空串/空白串和false相等
+		// 在其余的情况下：只要是不同的基本数据类型进行运算和比较：
+		// 第一步：先看是不是 +
+		// 	如果是+   看有没有字符串，如果有 就是拼接字符串
+		// 第二步：再看是不是比较
+		// 	如果是比较  看是不是两边都是字符串   如果是 比较的是字符串的Unicode码
+		// 最后：  全部转数字
+		// 
+		//			console.log(NaN == NaN);!!!!!!!!!!!!!!!!!!!!false
+		// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+		//数字和其它数据类型的运算
+		var a = 5;
+		var b = '';
+		// ！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！
+		// 加法+运算时，只要其中有一个string类型的，就是把其他的都强转为string，然后进行字符串拼接
+		// console.log(typeof(a+b),a + b);
+		//			console.log(a - b);
+		//			console.log(a > b);
+		//			console.log(a < b);
+		//			console.log(a == b);
+
+		b = true; //1
+
+		//			console.log(a + b);
+		//			console.log(a - b);
+		//			console.log(a > b);
+		//			console.log(a < b);
+		//			console.log(a == b);
+
+
+		b = undefined; //NaN
+		//			console.log(a + b);
+		//			console.log(a - b);
+		//			console.log(a > b);
+		//			console.log(a < b);
+		//			console.log(a == b);
+		//			console.log(NaN == NaN);!!!!!!!!!!!!!!!!!!!!false
+		b = null; //0
+
+		//字符串和其它数据类型的运算
+		a = 'sdfasf';
+		b = true;
+		a = '123';
+		a = '';
+		b = undefined;
+		a = 'sjhdga';
+		a = '123';
+		a = '';
+		b = null;
+		a = 'sjhdga';
+		a = '123';
+		a = '';// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!! a == b 竟然也是false
+		
+
+		//boolean和其它数据类型
+		a = false;
+		b = undefined; //false==undefined 是false
+		b = null;// !!!!!!!!!!!!!!!!!!!!!!!!!!!! a == b 竟然也是false
+
+		//undefined和其它类型
+		a = undefined;
+		b = null;//!!!!!!!!!!!!!!!!!!!!!!!!!!!!! undefined 和 null == 竟然是true
+		a = '  ';
+		// b = false;
+		console.log(typeof (a + b), a + b);
+		console.log(typeof (a - b), a - b);
+
+		console.log(a > b);
+		console.log(a < b);
+		console.log(a == b);
+
+		console.log(0 == null);
+
+		console.log(' '==0);
+		console.log(' '==false);
+		console.log(Number(null));
+	</script>
+</body>
+
+</html>

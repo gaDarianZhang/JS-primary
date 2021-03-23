@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        a{
+            text-decoration: none;
+        }
+        input{
+            outline: none;
+        }
+        img{
+            display: block;
+        }
+        ul,li{
+            list-style: none;
+        }
+        html,body{
+            height: 100%;
+            overflow: hidden;
+        }
+        .clearfix{
+            content: '';
+            display: table;
+            clear: both;
+        }
+        #wrap{
+            height: 100%;
+            width: 100%;
+            overflow: hidden;
+        }
+        #wrap .banner{
+            width: 600px;
+            height: 400px;
+            /* background-color: skyblue; */
+            overflow: hidden;
+            margin: 50px auto;
+            position: relative;
+        }
+        #wrap .banner .imgList{
+            position: absolute;
+            top: 0;
+            left: -600px;
+            width: 4200px;
+            height: 100%;
+        }
+        #wrap .banner .imgList li{
+            float: left;
+            height: 100%;
+            width: 600px;
+
+        }
+        #wrap .banner .imgList li img{
+            width: 100%;
+            height: 100%;
+        }
+        /* 设置小圆点 */
+        #wrap .banner .iconList{
+            position: absolute;
+            left: 50%;
+            bottom: 20px;
+            transform: translateX(-50%);
+            /* background-color: hotpink;
+            width: 100px;
+            height: 20px; */
+        }
+        #wrap .banner .iconList li{
+            float: left;
+            width: 10px;
+            height: 10px;
+            background-color: rgba(0, 0, 0, .3);
+            border-radius: 50%;
+            border: 3px solid transparent;
+            background-clip: content-box;
+            margin-right: 5px;
+            transition: background-color .3s,border-color .3s;
+        }
+        #wrap .banner .iconList li.choice{
+            background-color: white;
+            border: 3px solid rgba(0, 0, 0, .3);
+        }
+        /* 设置左右按钮 */
+        #wrap .banner .left,
+        #wrap .banner .right{
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 40px;
+            height: 60px;
+            background-color: rgba(0, 0, 0, .3);
+            font-size: 40px;
+            color: springgreen;
+            text-align: center;
+            line-height: 60px;
+            opacity: 0;
+            transition: opacity .5s;
+        }
+        #wrap .banner .left{
+            left: 0;
+        }
+        #wrap .banner .right{
+            right: 0;
+        }
+    </style>
+</head>
+<body>
+<div id="wrap">
+    <div class="banner">
+        <ul class="imgList">
+            <li><img src="../11day/img/6.jpg" alt=""></li>
+            <li><img src="../11day/img/2.jpg" alt=""></li>
+            <li><img src="../11day/img/3.jpg" alt=""></li>
+            <li><img src="../11day/img/4.jpg" alt=""></li>
+            <li><img src="../11day/img/5.jpg" alt=""></li>
+            <li><img src="../11day/img/6.jpg" alt=""></li>
+            <li><img src="../11day/img/2.jpg" alt=""></li>
+        </ul>
+        <ul class="iconList">
+            <li class="choice"></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+        </ul>
+        <span class="left"><</span>
+        <span class="right">></span>
+    </div>
+</div>
+<script>
+    var banner = document.querySelector('#wrap .banner');
+    var leftBtn = document.querySelector('#wrap .banner .left');
+    var rightBtn = document.querySelector('#wrap .banner .right');
+    var imgWrap = document.querySelector('#wrap .banner .imgList');
+    var iconList = document.querySelectorAll('#wrap .banner .iconList>li');
+    var isMove = false;
+
+    var autoTimer = null;
+    //设置左右切换按钮
+    banner.onmouseenter = function(){
+        leftBtn.style.opacity = 1;
+        rightBtn.style.opacity = 1;
+        clearInterval(autoTimer);
+    }
+    banner.onmouseleave = function(){
+        leftBtn.style.opacity = 0;
+        rightBtn.style.opacity = 0;
+        autoPlay();
+    }
+    rightBtn.onclick = function(){
+        movePic(true);
+    }
+    leftBtn.onclick = function(){
+        movePic(false);
+    }
+    // //设置小圆点
+    //
+    // for(var i =0;i<iconList.length;i++){
+    //     // console.log(iconList[i].className);
+    //     iconList[i].onclick = function(){
+    //         for(var j=0;j<iconList.length;j++){
+    //             iconList[j].className = '';
+    //         }
+    //         this.className = 'choice';
+    //     }
+    // }
+
+    //点击小圆点，移动到对应图片
+    for(var i=0;i<iconList.length;i++){
+        iconList[i].index = i;
+        iconList[i].onclick = function () {
+            movePic((this.index + 1)*(-600));
+        }
+
+    }
+
+    autoPlay();
+
+    //自动轮播，是不是可以理解为自动发生right btn的click事件呢？
+    function autoPlay() {
+        autoTimer = setInterval(function () {
+                movePic(true);
+        },2000)
+    }
+
+    //用定时器来实现图片左右滑动(也可以用移动来做)
+    //这个函数内解决了点击左右切换连续问题，下方小圆点跟着变化，还有点击过快的问题
+    function movePic(direc){
+        //direc:true，点击right按钮，选右边的图片,数字的话，是滚动到的位置
+
+        //处理连续点击
+        if(isMove){
+            return;
+        }
+        isMove = true;
+        var allTime = 600;
+        var stepTime = 20;
+        var dis = 600;
+        var timer = NaN;
+        if(typeof direc == "boolean"){
+            if(direc){
+                dis = -600;
+            }
+        }
+        else {
+            dis = direc - imgWrap.offsetLeft;
+        }
+
+        var stepDis = dis/(allTime/stepTime);
+        var nextDis = imgWrap.offsetLeft + dis;//这一次点击后应该到达的位置
+        // console.log(nextDis);
+        timer = setInterval(function(){
+            var nextStep = imgWrap.offsetLeft + stepDis;//一小段定时到的时候应该在的位置
+            // console.log(nextStep);
+            if(nextStep==nextDis){
+                isMove = false;
+                clearInterval(timer);
+                //设置无缝
+                if(nextStep == -3600 || nextStep == 0){
+                    nextStep = (nextStep==-3600) ? -600 : -3000;
+                }
+            }
+            imgWrap.style.left = nextStep + 'px';
+
+            //小圆点切换，这是获取实时的图片位置。不好！可以用这次点击应该的最终位置嘛
+            // var num = imgWrap.style.left.slice(0,-2)/(-600)-1;
+            // console.log(num);
+            // for(var i=0;i<iconList.length;i++){
+            //     if(i!=num){
+            //         iconList[i].className = '';
+            //     }
+            //     else{
+            //         iconList[i].className = 'choice';
+            //     }
+            // }
+        },stepTime);
+
+        //左右切换的时候小圆点也跟着换
+        var index = nextDis/(-600) - 1;//会遇到index=-1和5
+        if(index == -1){
+            index = 4;
+        }
+        else if(index == 5){
+            index = 0;
+        }
+        for(var i=0;i<iconList.length;i++){
+            if(i!=index){
+                iconList[i].className = '';
+            }
+            else{
+                iconList[i].className = 'choice';
+            }
+        }
+        // autoIndex = index + 1;
+    }
+
+
+
+</script>
+</body>
+</html>

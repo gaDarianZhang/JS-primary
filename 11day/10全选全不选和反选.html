@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<button>全选</button>
+<button>全不选</button>
+<button>反选</button>
+<input type="checkbox">1
+<input type="checkbox">2
+<input type="checkbox">3
+<input type="checkbox">4
+<input type="checkbox">5
+<input type="checkbox">6
+<script>
+    var btns = document.querySelectorAll('button');
+    var inps = document.querySelectorAll('input');
+    //全选
+    btns[0].onclick = function () {
+        for (var i = 0; i < inps.length; i++) {
+            inps[i].checked = true;
+        }
+    }
+    //全不选
+    btns[1].onclick = function (){
+        for (var i = 0; i<inps.length; i++){
+            inps[i].checked = false;
+        }
+    }
+    //反选
+    btns[2].onclick = function (){
+        for (var i = 0; i<inps.length; i++){
+            inps[i].checked = !inps[i].checked;
+        }
+    }
+</script>
+</body>
+</html>

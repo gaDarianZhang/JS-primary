@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        div{
+            width: 200px;
+            height: 200px;
+            background-color: #bbffaa;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+<!--div正常情况下是没办法被获取焦点的，但是为了获取焦点可以如下操作：
+    添加属性：tabindex，并赋一个正数。
+-->
+<div>
+    haha
+</div>
+<input type="text" value="赵丽颖">
+<script>
+    var input = document.querySelector("input");
+    input.onfocus = function () {
+        this.value = "杨幂";
+        this.style.width = '500px';
+        this.style.backgroundColor = "#bfa";
+        this.style.opacity = '0.3';
+    }
+    input.onblur = function () {
+        this.value = "赵丽颖";
+        var red = Math.floor(Math.random()*256);
+        var green = Math.floor(Math.random()*256);
+        var blue = Math.floor(Math.random()*256);
+        this.style.backgroundColor = 'rgb('+red+','+green+','+blue+')';
+    }
+
+//    让div能获取焦点
+    var box = document.querySelector('div');
+    box.tabIndex = '1.1';
+    box.onfocus = function () {
+        console.log("获取到了div焦点");
+    }
+</script>
+</body>
+</html>

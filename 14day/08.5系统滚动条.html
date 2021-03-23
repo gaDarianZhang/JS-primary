@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        html{
+            height: 500px;
+            width: 500px;
+            /*background-color: hotpink;*/
+            border: 2px solid blue;
+            margin-left: 100px;
+            /*overflow: scroll;*/
+            /*overflow: hidden;*/
+        }
+        body{
+            height: 300px;
+            width: 300px;
+            border: 2px solid deepskyblue;
+            margin-left: 50px;
+            overflow: scroll;
+            /*overflow: hidden;*/
+        }
+        #box{
+            width: 40px;
+            height: 40px;
+            background-color: hotpink;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+    </style>
+</head>
+<body>
+<!--window——》document——》初始包含块(视口)——》html(html的backgroundColor会设给document)——》body-->
+<!--
+其实可以理解为：body一般情况下控制body身上的滚动条，html总是控制document滚动条（document滚动条就是指系统的滚动条）
+              但，如果body和html只有一个设置为scroll,且，另一个连overflow都没设置，那么打开的都是document的滚动条。
+
+-->
+<div id="box"></div>
+</body>
+</html>

@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<input type="button" value="阅读协议(10)" disabled>
+<script>
+    var btn = document.querySelector('input');
+    var num = 10;
+    var timer = setInterval(function () {
+        num--;
+        btn.value = '阅读协议(' + num + ')';
+        if(num==0){
+            btn.disabled = false;
+            clearInterval(timer);
+        }
+    },1000);
+</script>
+</body>
+</html>

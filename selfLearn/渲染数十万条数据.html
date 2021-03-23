@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<ul></ul>
+<script type="text/javascript">
+    let ulNode = document.querySelector("ul");
+    const totalItem = 100000;
+    let counter = 0;
+    let loopCounter = 0;
+    const once = 20;
+    const loopCount = Math.ceil(totalItem/once);
+    let fragmentElement = document.createDocumentFragment();
+
+    function addNode() {
+        if (loopCounter>=loopCount){
+            return ;
+        }
+        for (var i = 0; i < once; i++) {
+            let node = document.createElement("li");
+            node.innerText = counter++;
+            fragmentElement.appendChild(node);
+        }
+        ulNode.appendChild(fragmentElement);
+        loopCounter++;
+        window.requestAnimationFrame(addNode);
+    }
+    window.requestAnimationFrame(addNode);
+
+
+
+
+</script>
+</body>
+</html>

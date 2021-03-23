@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<!--！！！子节点！！！包括了子元素节点、子文本节点、子注释节点等；！！子元素！！是指子节点中的那些元素节点。-->
+<div class="box">
+    <ul>
+        <li>1</li>
+        <li>2</li>
+        <li>3</li>
+        <li>4</li>
+        <li>5</li>
+        <li>6</li>
+    </ul>
+</div>
+<script>
+    var box = document.getElementsByClassName('box');//!!!!!!得到的是个伪数组
+    console.log(box);
+    console.log(box[0].childNodes);//！！！！！通过ByClassName得到的是个数组
+    console.log(box[0].children);
+    //或者这种方式，querySelector得到的是单个元素
+    var box = document.querySelector('.box');
+    console.log(box);
+    console.log(box.childNodes);
+    console.log(box.children);
+
+//    父节点：parentNode,parentElement
+    console.log(box.parentNode);
+    console.log(box.parentElement);
+    console.log(box.parent);
+
+
+</script>
+</body>
+</html>

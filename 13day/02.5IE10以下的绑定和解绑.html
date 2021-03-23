@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<button>点解绑定事件</button>
+<button>点解解绑事件</button>
+<script>
+    //dom2
+    //    IE10以下的绑定和解绑,！！！！！！！！！！！！也是可以绑定多个的！！！！！！！！！！！！！
+    var btns = document.getElementsByTagName('button');
+
+    btns[0].attachEvent('onclick',fuc);//onclick，不是click了
+    btns[0].attachEvent('onclick',fuc1);//onclick，不是click了
+    function fuc() {
+        console.log('点击绑定了');
+    }
+    function fuc1(){
+        console.log('第二个了');
+    }
+
+    btns[1].attachEvent('onclick',function () {
+        btns[0].detachEvent('onclick',fuc);
+    });
+
+
+</script>
+</body>
+</html>

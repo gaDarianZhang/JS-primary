@@ -1,0 +1,35 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<script type="text/javascript">
+    //数组定义的方法：
+    //字面量定义的时候没啥坑
+    //如果用的是构造函数或者是省了new的构造函数（普通函数调用）
+    //传参数只传一个数字，这个数字将代表数组的长度，数组当中是这么多的undefined
+    //如果传的是多个参数，那么将以这些参数作为元素生成新数组；
+    var arr1 = [1,2,3];
+    console.log(arr1);
+
+    var arr2 = new Array(3);
+    console.log(arr2);
+    var arr22 = new Array(1,2,3);
+    console.log(arr22);
+
+
+    var arr3 = Array(3);
+    console.log(arr3);
+    var arr32 = Array(1,2,3);
+    console.log(arr32);
+
+    var arr4 = Array.of(3);
+    console.log(arr4);
+
+
+</script>
+</body>
+
+</html>

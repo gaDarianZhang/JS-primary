@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .box{
+            width: 200px;
+            height: 200px;
+            background-color: #bbffaa;
+
+        }
+    </style>
+</head>
+<body>
+<div class="box"></div>
+<button>盒子开关</button>
+<script>
+    var btn = document.querySelector('button');
+    var box = document.querySelector('.box');
+    var flag = true;
+    btn.addEventListener('click',function () {
+        if (flag){
+            box.style.display = "none";
+        }
+        else{
+            box.style.display = "block";
+        }
+        flag = !flag;
+    })
+</script>
+</body>
+</html>

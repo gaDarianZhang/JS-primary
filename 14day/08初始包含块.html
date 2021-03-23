@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        html{
+            height: 500px;
+            width: 500px;
+            /*background-color: hotpink;*/
+            border: 2px solid blue;
+            margin-left: 100px;
+        }
+        body{
+            height: 300px;
+            width: 300px;
+            border: 2px solid deepskyblue;
+            margin-left: 50px;
+        }
+        #box{
+            width: 40px;
+            height: 40px;
+            background-color: hotpink;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+    </style>
+</head>
+<body>
+<!--window——》document——》初始包含块(视口)——》html(html的backgroundColor会设给document)——》body-->
+<div id="box"></div>
+</body>
+</html>

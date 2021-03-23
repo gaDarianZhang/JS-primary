@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        p{
+            background-color: hotpink;
+            /* width: 200px; */
+            height: 100px;
+        }
+        p.sb{
+            background-color: skyblue;
+        }
+    </style>
+</head>
+<body>
+    <p id="pp" class="class1">07196666</p>
+    <!-- <button type="submit" id="btn"> anniu</button> -->
+    <input type="button" value="按钮" id='btn'>
+    <script>
+        window.onload = function(){
+            var btn = document.getElementById('btn');
+            var p = document.getElementById('pp');
+
+            btn.onclick = function(){
+                // p.class 不合法，因为class是JS的保留字，改用className
+                p.className = 'sb';//修改，不是添加
+                console.log(p.classList);
+            }
+        }
+    </script>
+</body>
+</html>

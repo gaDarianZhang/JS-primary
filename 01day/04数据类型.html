@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>数据类型</title>
+</head>
+
+<body>
+    <script>
+        //数字类型
+        var num1 = 1;
+        console.log(typeof (num1));
+        var num2 = 0.1;
+        console.log(typeof (num2));
+        var num3 = 0xff;
+        console.log(num3, typeof (num3));
+        //字符串类型
+        var name = "赵丽颖";
+        name = '';//空字符串
+        name = ' ';//空白字符串
+        name = 'woai"niya"';
+        name0 = '张总';
+        console.log(name,typeof (name),''==null,typeof(''));
+        console.log('我的名字是'+name0);
+        console.log('我的名字叫',name0);
+        console.log('我的名字是'+num1);
+        console.log(122,name0);
+
+        //boolean 布尔类型
+        var isEmpty = false;
+        console.log(isEmpty);
+        console.log('nishi' == "nishi");
+
+        // undefined  未定义的类型  只有一个值   undefined
+        var sex;//undefined虽然字面意思是未定义的意思，但是它代表的是定义了变量，没有赋值，此时，变量里面存的就是undefined；
+        console.log(typeof(sex),sex);
+
+        //  null   空类型
+        // 定义的变量赋值为null(一般是对对象进行初始化使用或者是删除一个对象的时候用到)
+        var obj = null;
+        console.log(obj,typeof(obj));
+        console.log(typeof name);//竟然可以不加括号
+
+        // 小面试
+        console.log(typeof(typeof(num1)));
+        console.log(typeof(typeof(isEmpty)));
+        console.log(typeof typeof(typeof(isEmpty)));
+        
+
+        //    变量初始化的约定成俗
+
+        var sum = 0;    //初始化，初始给变量的值，但是此时并不知道后面要存储的值，代表以后存储数字
+        var carName = '';//代表以后要存储的是一个字符串
+        var isClose = true;//代表以后要存储的是一个boolean
+        // var a = undefined;//这个情况几乎不存在，因为初始化就是对一遍变量初始赋值，undefined本来就是定义变量，没有赋值，所以，不能叫做初始化
+        var dog = null;//代表这个dog变量以后存储一个狗的对象；
+
+    </script>
+</body>
+
+</html>

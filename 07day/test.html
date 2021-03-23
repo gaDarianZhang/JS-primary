@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>test</title>
+</head>
+<body>
+<script type="text/javascript">
+    function fruits(){
+        this.color = "blue"
+    }
+
+    fruits.prototype = {
+        color: "red",
+        say: function(){
+            console.log("My color is " + this.color);
+        }
+    };
+
+    var apple = new fruits;
+    apple.say();//My color is blue
+    apple.__proto__.say();//My color is red
+    console.log(apple);
+
+</script>
+</body>
+</html>

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<input type="text" id="inp">
+<script>
+    var input = document.getElementById('inp');
+    //键盘事件中每个键都会触发，添加的方式和鼠标事件添加方式一致，
+    //但是键盘事件，我们无法区分到底是哪个键。所以区分按下的键是什么键是键盘事件中的关键。
+    //每一个键会有一个keyCode.
+    //事件function中第一个形参是event
+    input.onkeydown = function (event){
+        event = event || window.event;
+        console.log("keydown");
+        console.log(event.keyCode);
+        if(event.keyCode==13){
+            alert("发生了回车事件");
+        }
+    }
+</script>
+</body>
+</html>

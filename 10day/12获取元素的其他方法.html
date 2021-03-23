@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <p class="pp" id="ppp">1</p>
+    <p class="pp">2</p>
+    <p >3</p>
+    <p>4</p>
+    <script>
+        window.onload = function(){
+            var pList = document.getElementsByTagName('p');
+            console.log(pList);
+            console.log(typeof pList);
+            var pList1 = document.getElementsByClassName('pp');
+            console.log(pList1);
+
+            // var pList2 = document.querySelectorAll('#ppp');//可以
+            // var pList2 = document.querySelectorAll('.pp');//可以
+            var pList2 = document.querySelectorAll('p');
+            console.log(pList2);
+
+            var pList3 = document.querySelector('#ppp');
+            console.log(pList3);
+
+            var pList4 = document.querySelector('.pp:nth-of-type(2)');//!!!!!!!!!!!!!
+            console.log(pList4);
+        }
+    </script>
+</body>
+</html>

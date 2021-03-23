@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<button>点击绑定事件</button>
+<button>点击解绑事件</button>
+<script>
+    function addEvent(obj, eventType, func, isBubble) {
+        if (obj.addEventListener){//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+            //高级浏览器
+            // console.log(obj.addEventListener);
+            obj.addEventListener(eventType,func,isBubble);
+        }
+        else{
+            //低级浏览器
+            obj.attachEvent('on'+eventType,func);
+        }
+    }
+
+    function removeEvent(obj, eventType, func, isBubble) {
+        if (obj.removeEventListener){//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+            //高级浏览器
+            // console.log(obj.removeEventListener);
+            obj.removeEventListener(eventType,func,isBubble);
+        }
+        else{
+            //低级浏览器
+            obj.detachEvent('on'+eventType,func);
+        }
+    }
+
+    var btns = document.getElementsByTagName('button');
+    function fuc() {
+        console.log('我被绑上了动作了');
+    }
+    addEvent(btns[0],'click',fuc,false);
+    addEvent(btns[1],'click',function () {
+        console.log('把他的动作给解掉了');
+        removeEvent(btns[0],'click',fuc,false);
+    },false);
+</script>
+</body>
+</html>

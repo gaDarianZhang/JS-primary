@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<button>点解绑定事件</button>
+<button>点解解绑事件</button>
+<script>
+    //    ！！！！！！！dom2事件！！！！！！！！
+    //!!!!!!!!!!!!!!!!!!!!!!!!!dom2事件的绑定一定要把函数提出来，不要在里边写function(){},这样的话因为解绑的时候还需要
+    //！！！！！！！！！！！！！！！同样的参数，再写一个function，就相当于一个新的函数了。
+    var btns = document.getElementsByTagName('button');
+
+    // btns[0].addEventListener('click',function () {
+    //        console.log('绑定了');
+    // },false);
+    //或者把事件反应函数（匿名函数）提取出来
+    btns[0].addEventListener('click',fuc,false);
+
+    function fuc() {
+        console.log('点击绑定了');
+    }
+    //！！！！！！！！！！！！！！dom2可以在同一个元素上多个同种的事件，且不会产生覆盖，而是都执行。！！！！！！！！！！！
+    btns[0].addEventListener('click',fuc1,false);
+    function fuc1() {
+        console.log('点点点点点击了');
+    }
+
+//    ！！！！！！！！！！！！！dom2事件的解绑！！！！！！！！！！！！
+//    dom2事件解绑的时候一定要和绑定的时候参数一致
+    btns[1].addEventListener('click',function () {
+        btns[0].removeEventListener('click',fuc,false);
+    },false);
+
+
+
+</script>
+</body>
+</html>

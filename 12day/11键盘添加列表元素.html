@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<input type="text" placeholder="请输入一个明星的名字">
+<ul class="list">
+
+</ul>
+<script>
+    var inputNode = document.querySelector('input');
+    var ulNode = document.querySelector('.list');
+    inputNode.onkeyup = function (event) {
+        if(event.keyCode === 13){
+            var text = inputNode.value;
+            if (text.trim()){//trim()去除两边的空格
+                var liNode = document.createElement('li');
+                liNode.innerText = text;
+                ulNode.appendChild(liNode);
+                //创建完新的li就直接给它添加移入变色
+                liNode.onmouseenter = function () {
+                    this.style.backgroundColor = '#bfa';
+                }
+                liNode.onmouseleave = function () {
+                    this.style.backgroundColor = 'transparent';
+                }
+            }
+            else{
+                alert('lalalalal');
+            }
+            inputNode.value = '';
+        }
+    }
+</script>
+</body>
+</html>

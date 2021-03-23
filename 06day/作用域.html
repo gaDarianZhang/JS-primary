@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        var scope = 'global';
+
+        function checkScope(){
+            console.log(scope);
+            var scope = 'inner-scope';
+            console.log(scope);
+            myScope = 'local';
+            return myScope;
+        }
+
+        console.log(scope);
+        console.log(checkScope());
+
+        
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>交换变量的值</title>
+</head>
+
+<body>
+    <script>
+        var num1 = 2;
+        var num2 = 3;
+        num1 = num1 + num2;
+        num2 = num1 - num2;
+        num1 = num1 - num2;
+        console.log(num1,"\n", num2);
+
+        var age1 = 10;
+        var age2 = 20;
+        var temp = age1;
+        age1 = age2;
+        age2 = temp;
+        console.log(age1);
+        console.log(age2);
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+<!-- <ul class="list">
+    <li>1</li>
+    <li>2</li>
+    <li>3</li>
+    <li>4</li>
+    <li>5</li>
+    <li>6</li>
+</ul> -->
+<script>
+    var movies = ['哪吒', '烈火英雄', '上海堡垒', '速度与激情'];
+    // 先用第二种方法,innerHtml
+    // var str = "<ul class='list'>";
+    // for(var i=0;i<movies.length;i++){
+    //     str += "<li>" + movies[i] +'</li>';
+    // }
+    // str += '</ul>';
+    // document.body.innerHTML += str;
+
+    // 再换第三种方法，createElement
+    var ulNode = document.createElement('ul');
+    for (var i = 0; i < movies.length; i++) {
+        var liNode = document.createElement('li');
+        liNode.innerText = movies[i];
+        ulNode.appendChild(liNode);
+    }
+    document.body.appendChild(ulNode);
+    ulNode.setAttribute('class', 'list');
+
+    var ulList = document.querySelector('.list');
+    // console.log(liList);
+    var liList = ulList.children;
+    // 或者
+    // var liList = document.querySelectorAll('.list>li');
+    for (var i = 0; i < liList.length; i++) {
+        if (i % 2 == 0) {
+            liList[i].style.backgroundColor = '#bfa';
+        } else {
+            liList[i].style.backgroundColor = 'hotpink';
+        }
+    }
+</script>
+</body>
+</html>

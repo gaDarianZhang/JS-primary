@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .clearfix{
+            content: '';
+            display: table;
+            clear: both;
+        }
+        body{
+            border: 1px solid red;
+        }
+        #box{
+            width: 300px;
+            height: 300px;
+            background-color: #bbffaa;
+            margin: 50px 50px;
+            box-sizing: border-box;
+            padding: 20px;
+            /*background-clip: content-box;*/
+            border: solid red 10px;
+        }
+        html{
+            height: 2000px;
+        }
+    </style>
+</head>
+<body>
+<div id="box" class="clearfix"></div>
+<script>
+    var box = document.querySelector('#box');
+    box.onclick = function (event) {
+        console.log(event);
+    }
+//    event内有：
+//    clientX,clientY:表示的是鼠标的点击位置与视口的相对位置
+//    offsetX,offsetY:表示的是鼠标的点击位置与被点击元素的填充边的相对位置
+//    pageX,pageY:表示的是鼠标的点击位置与页面的相对位置（比如，页面向下活动后，那么pageY就可以很大，超过视口的高度）
+</script>
+</body>
+</html>

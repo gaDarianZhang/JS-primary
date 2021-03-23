@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    var num = 0;
+    //设置循环定时器
+    var timer = setInterval(function () {
+        num++;
+        console.log('I');
+        if(num==5){
+            clearInterval(timer);
+        }
+    },3000);
+//    清除循环定时器
+//     clearInterval()
+//     if(num==5){
+//         clearInterval(timer);
+//         console.log('解除定时');
+//     }
+//    这个设置在定时器外就起不到作用了
+
+</script>
+</body>
+</html>

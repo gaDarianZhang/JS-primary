@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        div{
+            position: absolute;
+            left: 0;
+            right: 0;
+            top: 0;
+            bottom: 0;
+            margin: auto;
+        }
+        .out{
+            width: 500px;
+            height: 500px;
+            background-color: #bbffaa;
+        }
+        .medium{
+            width: 50%;
+            height: 50%;
+            background-color: aqua;
+        }
+        .in{
+            width: 50%;
+            height: 50%;
+            background-color: antiquewhite;
+        }
+    </style>
+</head>
+<body>
+<div class="out">
+    外
+    <div class="medium">
+        中
+        <div class="in">内</div>
+    </div>
+</div>
+<input type="button" value="阻止事件流">
+<script>
+    var boxOut = document.querySelector('.out');
+    var boxMedium = document.querySelector('.out .medium');
+    var boxIn = document.querySelector('.out .medium .in');
+    //默认false，是冒泡
+    // boxOut.addEventListener('click',function () {
+    //     console.log('out');
+    // });
+    // boxMedium.addEventListener('click',function () {
+    //     console.log('medium');
+    // });
+    // boxIn.addEventListener('click',function () {
+    //     console.log('in');
+    // });
+
+    //改为true，就是捕获了
+    boxOut.addEventListener('click',function () {
+        console.log('out');
+    },true);
+    boxMedium.addEventListener('click',function () {
+        console.log('medium');
+    },true);
+    boxIn.addEventListener('click',function () {
+        console.log('in');
+    },true);
+
+    //改为dom0的click看看有没有捕获或者冒泡
+    //dom0的onclick是支持冒泡的！！！！！！！！！！！！！！！！
+    // boxOut.onclick = function(){
+    //     console.log('OUT');
+    // }
+    // boxMedium.onclick = function(){
+    //     console.log('Medium');
+    // }
+    // boxIn.onclick = function (){
+    //     console.log('In');
+    // }
+
+    //阻止事件流
+    // var btn = document.querySelector('input');
+    //直接添加在要在哪停止冒泡或捕获的元素上
+    // boxIn.addEventListener('click',function (event) {
+    //     event = event || window.event;
+    //     event.stopPropagation();
+    // })
+
+</script>
+</body>
+</html>

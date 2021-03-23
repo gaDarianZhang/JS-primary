@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        img {
+            display: block;
+        }
+
+        ul, li {
+            list-style: none;
+        }
+
+        input {
+            outline: none;
+        }
+
+        html, body {
+            height: 100%;
+            overflow: hidden;
+        }
+
+        #wrap {
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            position: relative;
+        }
+
+        #wrap .scrollBar {
+            position: absolute;
+            width: 20px;
+            height: 100%;
+            border-left: 1px solid gray;
+            border-right: 1px solid gray;
+            right: 0;
+            top: 0;
+        }
+
+        #wrap .scrollBar .scrollIn {
+            position: absolute;
+            width: 15px;
+            /*height: 100px;*/
+            background-color: skyblue;
+            left: 50%;
+            transform: translateX(-50%);
+            top: 0;
+        }
+
+        #wrap .content {
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+    </style>
+</head>
+<body>
+<div id="wrap">
+    <div class="content"></div>
+    <div class="scrollBar">
+        <div class="scrollIn"></div>
+    </div>
+</div>
+<script>
+    var content = document.querySelector('#wrap .content');
+    var scrollBlock = document.querySelector('#wrap .scrollBar .scrollIn');
+    for (var i = 0; i < 200; i++) {
+        content.innerHTML += i + '<br>';
+    }
+    var rate = document.body.firstElementChild.clientHeight / content.offsetHeight;
+    // console.log(rate);
+    scrollBlock.style.height = rate * document.body.firstElementChild.clientHeight + 'px';
+    // console.log(scrollBlock.style.height);
+
+    scrollBlock.onmousedown = function (event) {
+        event = event || window.event;
+        //获取鼠标初始位置
+        var mouseStartY = event.clientY;
+        //获取滑块初始位置
+        var scroStartT = scrollBlock.offsetTop;
+        //取消浏览器默认行为，添加捕获
+        scrollBlock.setCapture && scrollBlock.setCapture();
+        document.onmousemove = function (event) {
+            event = event || window.event;
+            //获取鼠标最终位置
+            var mouseEndY = event.clientY;
+            //计算鼠标移动距离
+            var dis = mouseEndY - mouseStartY;
+            //计算滑块
+            var scroEndT = scroStartT + dis;
+
+            //判断是否出界
+            if (scroEndT < 0) {
+                scroEndT = 0;
+            } else if (scroEndT > document.body.firstElementChild.clientHeight - scrollBlock.style.height.slice(0, -2)) {
+                scroEndT = document.body.firstElementChild.clientHeight - scrollBlock.style.height.slice(0, -2);
+            }
+            //设置滑块最终位置
+            scrollBlock.style.top = scroEndT + 'px';
+            //设置content最终位置
+            content.style.top = -scroEndT / rate + 'px';
+        }
+        document.onmouseup = function () {
+            scrollBlock.releaseCapture && scrollBlock.releaseCapture();
+            document.onmousemove = document.onmouseup = null;
+            // console.log('shutdown');
+        }
+        return false;
+    }
+    //通过冒泡，将滚轮事件添加到document上，那么不管在哪个位置滚动滚轮，都能捕捉到
+    document.addEventListener('mousewheel', mouseScroll);
+    document.addEventListener('DOMMouseScroll', mouseScroll);
+
+    function mouseScroll(event) {
+        var flag = true;
+        var scroStep = -10;//滚轮动一次，滚动条移动的距离
+        event = event || window.event;
+        // console.log(Boolean(event.wheelDelta));
+        // console.log(Boolean(event.detail));
+        var number = event.wheelDelta || event.detail;
+        // console.log(number,typeof number);
+        if (number == 120 || number == -3) {
+            //滚轮向下推
+            flag = true;
+            scroStep = -10;
+        } else if (number == -120 || number == 3) {
+            //滚轮向上滚
+            flag = false;
+            scroStep = 10;
+        }
+        console.log(flag);
+        var scroEndT = scrollBlock.offsetTop + scroStep;
+        if (scroEndT < 0) {
+            scroEndT = 0;
+        } else if (scroEndT > document.body.firstElementChild.clientHeight - scrollBlock.offsetHeight) {
+            scroEndT = document.body.firstElementChild.clientHeight - scrollBlock.offsetHeight;
+        }
+        scrollBlock.style.top = scroEndT + 'px';
+        content.style.top = -scroEndT / rate + 'px';
+    }
+</script>
+</body>
+</html>

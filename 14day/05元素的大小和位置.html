@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        #box1{
+            width: 500px;
+            height: 500px;
+            border: 10px solid red;
+            background-color: hotpink;
+            margin-left: 100px;
+            /*padding: 10px;*/
+            position: relative;
+        }
+        #box2{
+            width: 300px;
+            height: 300px;
+            border: 10px solid blue;
+            background-color: deepskyblue;
+            margin-left: 50px;
+            padding: 10px;
+            background-clip: content-box;
+            position: absolute;
+            left: 50px;
+            top: 20px;
+            overflow: auto;
+
+        }
+        #box3{
+            width: 400px;
+            height: 400px;
+            padding: 10px;
+            background-clip: content-box;
+            border: 10px solid purple;
+            background-color: #bbffaa;
+            margin: 20px 20px;
+        }
+
+    </style>
+</head>
+<body>
+<div id="box1">
+    <div id="box2">
+        <div id="box3"></div>
+    </div>
+</div>
+<button>输出scrollLeft/Top</button>
+<script>
+    let box1 = document.getElementById('box1');
+    let box2 = document.getElementById('box2');
+    //console.log(box1.style.width);//拿不到值，发现是空的，因为js操作的是行内样式，而这个样式不是在行内设置对1.
+    console.log(box2.offsetWidth);//拿的是盒子大小，包括content+padding+border
+    console.log(box2.clientWidth);//拿的是盒子大小，包括content+padding
+    console.log(box2.scrollWidth);//！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！
+                                    // 当内部子元素没有溢出的时候，大小和clientWidth一样，
+                                    //当内部子元素比盒子内容区大的时候，值是子元素整体盒子大小（content+padding+border），
+                                  //再加上子元素一侧的margin和自身一侧的padding.
+                                    // 也就是子元素border的大小+子元素一侧border外边到本元素border内侧的距离
+                                    //再或者，border内侧到子元素border外侧
+    console.log(box2.offsetHeight);
+    console.log(box2.clientHeight);
+    console.log(box2.scrollHeight);//比scrollWidth要再多一侧子元素的margin!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+    //拿到盒子的边框大小
+    console.log(box2.clientLeft);
+    console.log(box2.clientTop);
+
+    //拿到盒子的水平偏移量和垂直偏移量！！！！！！！！！！！！！！！！！！！！！！！！！！！
+    //拿的是离他最近的开启了定位的祖先元素的偏移量+外边距，即position:absolute的偏移量+自己的margin！！！！！！！！！！！！！！！
+    //其实就是自己的border外到祖先元素的border内侧!!!!!!!!!!!
+    //absolute的偏移量是：自己margin外侧到祖先元素的border内侧，所以上边要加一个自己的margin
+    console.log(box2.offsetLeft);
+    console.log(box2.offsetTop);
+//    以上都是只读的！！！！！！！！！！！！！！！！
+//    scrollLeft/scrollTop可读可写：子元素滚动的距离。右边只能到子元素的border,底部能到子元素的margin
+    var btn = document.querySelector('button');
+    btn.onclick = function () {
+        console.log("scrollLeft:"+box2.scrollLeft,"scrollTop:"+box2.scrollTop);
+        box2.scrollLeft = 50;
+        box2.scrollTop = 50;//不用px了
+    }
+</script>
+</body>
+</html>

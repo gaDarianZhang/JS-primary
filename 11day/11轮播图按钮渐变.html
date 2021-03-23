@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        /*html,body{*/
+        /*    height: 100%;*/
+        /*    overflow: hidden;*/
+        /*}*/
+        ui,li{
+            list-style: none;
+        }
+        .clearfix{
+            display: table;
+            content: '';
+            clear: both;
+        }
+        img{
+            /*width: 200px;*/
+            display: block;/*!!!!!!!!!!!！！!!!这是为了消除图片底部的空白，或者可以添加vertical-align:bottom*/
+        }
+        .banner{
+            width: 400px;
+            /*height: 300px;*/
+            margin: 50px auto;
+            overflow: hidden;
+            position: relative;
+        }
+        .banner .bannerList{
+            width: 2000px;
+            /*overflow: hidden;可以用overfolw:hidden开启bfc，或者position:absolute等*/
+        }
+        .banner .bannerList li{
+            width: 400px;
+            float: left;/*要给父类开启bfc*/
+        }
+        .banner .bannerList li img{
+            width: 100%;/*发现这些图片的长宽比不一致。仅仅是练习轮播图，所以就把高度也给固定了吧*/
+            height: 250px;/*祖先类 li .bannerList .banner的高度都被撑开了*/
+        }
+        /*设置小圆点*/
+        .banner .iconList{
+            /*overflow: hidden;*/
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            bottom: 10px;
+        }
+        .banner .iconList li{
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background-color: gray;
+            background-clip: content-box;
+            border: 3px solid transparent;
+            float: left;
+            margin-right: 5px;
+        }
+                /*！！！！！！！！！！！！给小圆点加个类，设置被选中后的状态！！！！！！！！！！！！！重要玩法*/
+        .banner .iconList li.current{
+            background-color: white;
+            border-color: rgba(0,0,0,.3);
+        }
+
+        .banner .left,
+        .banner .right{
+            /*display: block;*/
+            width: 30px;
+            height: 60px;
+            font-size: 20px;
+            text-align: center;
+            line-height: 60px;
+            position: absolute;
+            background-color: rgba(0,0,0,.3);
+            top: 50%;
+            transform: translateY(-50%);
+            color: aquamarine;
+            opacity: 0;/*鼠标未移入时看不见*/
+            transition: opacity .5s;
+        }
+        .banner .left{
+            left: 0;
+        }
+        .banner .right{
+            right: 0;
+        }
+    </style>
+</head>
+<body>
+<div class="banner">
+    <ul class="bannerList clearfix">
+        <li>
+            <img src="./img/2.jpg" alt="">
+        </li>
+        <li>
+            <img src="./img/3.jpg" alt="">
+        </li>
+        <li>
+            <img src="./img/4.jpg" alt="">
+        </li>
+        <li>
+            <img src="./img/5.jpg" alt="">
+        </li>
+        <li>
+            <img src="./img/6.jpg" alt="">
+        </li>
+    </ul>
+    <ul class="iconList clearfix">
+        <li class="current"></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+    </ul>
+    <span class="left"><</span>
+    <span class="right">></span>
+</div>
+
+<script>
+    var banner = document.querySelector('.banner');
+    var left = document.querySelector('.banner .left');
+    var right = document.querySelector('.banner .right');
+    // var imgList = ['./img/2.jpg','./img/3.jpg','./img/4.jpg','./img/5.jpg','./img/6.jpg'];
+    banner.onmouseenter = function () {
+        left.style.opacity = 1;
+        right.style.opacity = 1;
+    }
+    banner.onmouseleave = function () {
+        left.style.opacity = 0;
+        right.style.opacity = 0;
+    }
+//    点击小圆点，用排他法修改小圆点被选中状态
+    var iconList = document.querySelectorAll('.banner .iconList li');
+    for(var i=0;i<iconList.length;i++){
+        iconList[i].onclick = function () {
+            for (var j=0;j<iconList.length;j++){
+                //！！！！！！！！！！！重要玩法！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！
+                // iconList[j].style.backgroundColor = 'gray';
+                // iconList[j].style.borderColor = 'transparent';
+                iconList[j].className = '';
+            }
+            // this.style.backgroundColor = 'white';
+            // this.style.borderColor = 'rgba(0,0,0,.3)';
+            //要么是这注释掉的四行一块用，要么是用现在的；
+            this.className = 'current';
+
+        }
+    }
+</script>
+</body>
+</html>

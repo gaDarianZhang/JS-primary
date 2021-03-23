@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    //依旧是每1s timer1执行一次，不会等里边的timer2执行结束再开始timer1的另一次计时
+    //而且，每个timer1里边都会再次启动一个每5s一次的timer2。这样会累积很多很多。
+    // console.time('timer1');
+    // var timer1 = setInterval(function () {
+    //     console.timeLog('timer1')
+    //     var timer2 = setInterval(function () {
+    //         console.timeLog('timer1');
+    //     },5000);
+    //
+    // },1000);
+
+    var timer1 = null;
+    var num = 0;
+    timer1 = setInterval(function () {
+        num++;
+        console.log(num);
+    },1000);
+
+    var timer2 = setTimeout(function () {
+        clearInterval(timer1);
+        console.log("timer1被清楚",num);
+        
+    },2500);
+
+    var timer3 = setTimeout(function () {
+        console.log(num);
+    },5000);
+</script>
+</body>
+</html>

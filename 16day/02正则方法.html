@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    var result = null;
+    var str = '12345167892jfdkglkAJKSJFKLJFAK_#$?12324567821';
+    var pat = /\d/;
+    console.log(pat.test(str));
+
+    //判断字符串是否含有连续的abcd
+    pat = /abcd/;//false
+    pat = /123/;//true
+    pat = /9/;
+    console.log(pat.test(str));
+
+    //判断字符串是否是一个11位的数字
+    pat = /^\d{11}$/;
+    console.log(pat.test(str));
+    console.log(pat.test("12345678901"));
+
+    //exec方法：
+    pat = /\w+/;//只找到并返回第一个符合条件的
+    console.log(pat.exec(str));
+    result = pat.exec(str);
+    console.log(result.input);
+
+    pat = /\w+/g;
+    do{
+        result = pat.exec(str);
+        console.log(result);
+    }while(result);
+
+    console.log(str.match(/\w+/g));//没有位置索引
+    console.log(str.match(/\w+/));//包含位置索引
+
+</script>
+</body>
+</html>

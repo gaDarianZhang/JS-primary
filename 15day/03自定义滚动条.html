@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        img {
+            display: block;
+        }
+
+        ul, li {
+            list-style: none;
+        }
+
+        input {
+            outline: none;
+        }
+
+        html, body { /*关闭系统滚动条*/
+            height: 100%;
+            overflow: hidden;
+        }
+
+        #wrap {
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            position: relative;
+            /*background-color: #bbffaa;*/
+        }
+
+        .content {
+            position: absolute;
+            top: 0;
+            left: 0;
+            background-color: skyblue;
+        }
+
+        .scrollBar {
+            position: absolute;
+            right: 0;
+            top: 0;
+            border-right: 1px solid gray;
+            border-left: 1px solid gray;
+            width: 20px;
+            height: 100%;
+        }
+
+        .scrollBar .scrollIn {
+            position: absolute;
+            width: 15px;
+            /*height: 100px;*/
+            background-color: blue;
+            left: 50%;
+            transform: translateX(-50%);
+            top: 0;
+        }
+    </style>
+</head>
+<body>
+<div id="wrap"><!--这个用来模拟body，以后都要加上 -->
+    <div class="content">
+
+    </div>
+    <div class="scrollBar">
+        <div class="scrollIn"></div>
+    </div>
+</div>
+<script>
+    var content = document.querySelector('.content');
+    var scrollIn = document.querySelector('.scrollBar .scrollIn');
+    for (var i = 0; i < 200; i++) {
+        content.innerHTML += i + '<br>';
+    }
+    //  滑块的高度/窗口的高度 = 窗口的高度/内容的高度 = 滑块移动的距离/内容移动的距离
+    var rate = document.body.firstElementChild.clientHeight / content.offsetHeight;
+    console.log(rate);
+    scrollIn.style.height = rate * document.body.firstElementChild.clientHeight + 'px';
+    console.log(scrollIn.style.height);
+    scrollIn.onmousedown = function (event) {
+        event = event || window.event;
+        //拿鼠标位置
+        var mouseStartY = event.clientY;
+        //拿滑块位置
+        var scroStartT = scrollIn.offsetTop;
+        //元素发生事件后，所有鼠标事件都被捕获到元素身上
+        scrollIn.setCapture && scrollIn.setCapture();
+        document.onmousemove = function (event) {
+            event = event || window.event;
+            //拿到鼠标最终位置
+            var mouseEndY = event.clientY;
+            //计算鼠标的移动距离
+            var dis = mouseEndY - mouseStartY;
+            //滑块最终位置
+            var scroEndT = scroStartT + dis;
+            if (scroEndT < 0) {
+                scroEndT = 0;
+            } else if (scroEndT > document.body.firstElementChild.clientHeight - scrollIn.style.height.slice(0, -2)) {
+                scroEndT = document.body.firstElementChild.clientHeight - scrollIn.style.height.slice(0, -2);
+            }
+            scrollIn.style.top = scroEndT + 'px';
+            content.style.top = -scroEndT / rate + 'px';//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+        }
+        document.onmouseup = function () {
+            scrollIn.releaseCapture && scrollIn.releaseCapture();
+            document.onmousemove = document.onmouseup = null;
+        }
+        return false;
+    }
+
+</script>
+</body>
+</html>

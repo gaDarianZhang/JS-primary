@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        ul, li {
+            list-style: none;
+        }
+
+        img {
+            display: block;
+        }
+
+        input {
+            outline: none;
+        }
+
+        html, body {
+            height: 100%;
+            overflow: hidden;
+        }
+
+        .box {
+            width: 200px;
+            height: 100px;
+            background-color: deepskyblue;
+        }
+    </style>
+</head>
+<body>
+<div class="box"></div>
+<script>
+    var box = document.querySelector('.box');
+    box.addEventListener('mousewheel', mouseScroll);
+    box.addEventListener('DomMouseScroll', mouseScroll);
+
+    function mouseScroll(event) {
+        event = event || window.event;
+        var flag = true;
+        if (event.wheelDelta) {
+            if (event.wheelDelta > 0) {
+                //下推滚轮
+                flag = true;
+            } else {
+                flag = false;
+            }
+        } else if (event.detail) {
+            if (event.detail < 0) {
+                //下推滚轮
+                flag = true;
+            } else {
+                flag = false;
+            }
+        }
+        if (flag) {
+            box.style.height = box.offsetHeight - 10 + 'px';
+        } else {
+            box.style.height = box.offsetHeight + 10 + 'px';
+        }
+
+
+    }
+</script>
+</body>
+</html>

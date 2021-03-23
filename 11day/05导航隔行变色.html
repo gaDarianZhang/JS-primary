@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        ul,li{
+            list-style: none;
+            outline: none;
+        }
+        .nav{
+            width: 200px;
+            height: 300px;
+            border: 1px solid red;
+            border-bottom: none;
+        }
+        .list>li{
+            width: 100%;
+            height: 50px;
+            box-sizing: border-box;
+            border-bottom: 1px solid red;
+            text-align: center;
+            line-height: 50px;
+        }
+
+    </style>
+</head>
+<body>
+<div class="nav">
+    <ul class="list">
+        <li>1</li>
+        <li>2</li>
+        <li>3</li>
+        <li>4</li>
+        <li>5</li>
+        <li>6</li>
+    </ul>
+</div>
+<script>
+    var liList = document.querySelectorAll("ul>li");
+    for(var j=0;j<liList.length;j++){
+        if(j%2==0){
+            liList[j].style.backgroundColor = "skyblue";
+        }
+        else{
+            liList[j].style.backgroundColor = "#bfa";
+        }
+    }
+</script>
+</body>
+</html>

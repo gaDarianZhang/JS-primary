@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<a href="https://www.baidu.com" id="link">baidu</a>
+<input type="button" id="btn" value="click">
+
+<script type="text/javascript">
+    window.onclick = function (){
+        var btn = document.getElementById('btn');
+        var lin = document.getElementById('link');
+        btn.onclick = function () {
+            lin.href = "https://www.jd.com";
+        };
+    };
+
+
+</script>
+</body>
+</html>

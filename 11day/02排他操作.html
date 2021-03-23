@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        p{
+            background-color: hotpink;
+        }
+    </style>
+</head>
+<body>
+    <p>1</p>
+    <p>2</p>
+    <p>3</p>
+    <p>4</p>
+    <script>
+        // 排他操作：让所有的先变成一样的，然后再修改被点击的那个。
+        var pList = document.querySelectorAll('p');
+        for(var i = 0; i<pList.length; i++){
+            pList[i].onclick = function(){
+                for(var j=0;j<pList.length;j++){
+                    pList[j].innerHTML = 'innerHTML';
+                };
+                // pList[i].innerHTML = '我是被排除的那个';
+                // ！！！！！！！！！！！！！！！！！！不能用pList[i]！！！！！！！！！
+                // 因为click动作发生前，把这个function动作绑定到了4个对象上，function内容还没有执行。
+                // 当把四个对象依次绑定上function后，此时的i是4。然后发生click动作，开始执行function内
+                // 的东西，此时pList[i]是pList[4]，超出了数组长度。改用this
+                this.innerHTML = '我是被排除的那个';
+            };
+        }
+    </script>
+</body>
+</html>

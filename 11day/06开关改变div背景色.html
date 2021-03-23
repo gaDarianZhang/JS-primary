@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        div{
+            width: 200px;
+            height: 200px;
+            border: 2px solid red;
+            margin: 50px auto 0;
+            background-color: hotpink;
+        }
+        .btn{
+            width: 50px;
+            height: 30px;
+            outline: none;
+            border: none;
+            background-color: red;
+        }
+
+    </style>
+</head>
+<body>
+    <div>
+
+    </div>
+    <input type="button" value="按钮" class="btn">
+<script>
+    // var box = document.querySelector("div");
+    // var flag = true;//代表hotpink
+    // box.onclick = function () {
+    //     if(flag){
+    //         box.style.backgroundColor = '#bfa';
+    //         // flag = false;
+    //     }
+    //     else{
+    //         box.style.backgroundColor = 'hotpink';
+    //         // flag = true;
+    //     }
+    //     flag = !flag;
+    // }
+
+    let box = document.querySelector("div");
+    let btn = document.querySelector(".btn");
+    let flag = true;
+    btn.onclick = function () {
+        if (flag){
+            box.style.backgroundColor = "#bfa";
+        }
+        else{
+            box.style.backgroundColor = "hotpink";
+        }
+        flag ^= true;
+    }
+</script>
+</body>
+</html>

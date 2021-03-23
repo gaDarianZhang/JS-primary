@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        ul{
+            width: 200px;
+            height: 200px;
+            border: 1px solid red;
+            position: relative;
+        }
+        /*ul>:first-child{*/
+        /*    position: absolute;*/
+        /*    top: -20px;*/
+        /*}*/
+    </style>
+</head>
+<body>
+<input type="text" placeholder="请输入一个明星的名字">
+<ul class="list"></ul>
+<script>
+    //从输入表单内获得内容添加到list中，并给每一项添加鼠标移入移出颜色变化
+    var inputNode = document.querySelector('input');
+    var ulNode = document.querySelector('.list');
+
+    inputNode.onkeyup = function (event) {
+        event = event || window.event;
+        if (event.keyCode == 13){
+            var value = this.value;
+            if (value.trim()){
+                var newNode = document.createElement('li');
+                newNode.innerText = value;
+                newNode.setAttribute("class",'cLi');
+                ulNode.appendChild(newNode);
+
+            //    可以直接在这里为每一个新建的list添加移入移出变化
+            //    但是当要添加的元素多的时候，比如上万的时候，这一段代码的重复量就很大。
+            //    可以考虑时间委派。就是把自己的事件（比如点击事件）交给父元素，父元素再找到真正的事件源。
+            //     newNode.onmouseenter = function () {
+            //         this.style.backgroundColor = '#bfa';
+            //     }
+            //     newNode.onmouseleave = function () {
+            //         this.style.backgroundColor = 'transparent';
+            //     }
+            }
+            else {
+                alert('请输入合法内容');
+            }
+            inputNode.value = '';
+        }
+
+    }
+
+    //事件委派处理方式
+    //!!!!!!!!!!!!!!!!!!!!!！！不能用onmouseenter和onmouseleave
+    ulNode.onmouseover = function(event){
+        event = event || window.event;
+        //在里面我们去找发生事件的儿子
+        //通过父级元素去找发生事件的子元素（目标元素），它也会有兼容性问题；
+        var target = event.target||event.srcElement;
+        if(target.className == "cLi"){
+            target.style.backgroundColor = "hotpink";
+        }
+
+    }
+    ulNode.onmouseout = function (event) {
+        event = event || window.event;
+        //在里面我们去找发生事件的儿子
+        var target = event.target||event.srcElement;
+        if(target.className == "cLi"){
+            target.style.backgroundColor = 'transparent';
+        }
+    }
+
+
+</script>
+</body>
+</html>

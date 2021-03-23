@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        #box {
+            width: 150px;
+            height: 100px;
+            background-color: hotpink;
+            margin: 20px;/*增加难度*/
+            position: absolute;
+        }
+
+        html, body {
+            height: 100%;
+            overflow: hidden;
+        }
+
+        img{
+            width: 200px;
+            height: 100px;
+            position: absolute;
+            left: 0;
+            right: 0;
+            top: 0;
+            bottom: 0;
+            margin: auto;
+        }
+    </style>
+</head>
+<body>
+<!--！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！
+    1、box的原始位置加上鼠标的移动距离就是box的最终位置
+    2、pc端的onmousemove事件不会随着鼠标抬起而自动清除，要手动清除
+    3、onmousemove和onmouseup应该加在document上
+-->
+<div id="box">选中字拖拽试试</div>
+<img src="../11day/img/2.jpg">
+<script>
+    var box = document.getElementById('box');
+    var imgNode = document.querySelector('img');
+    box.onmousedown = function (event) {
+        event = event || window.event;
+        //鼠标初始位置
+        var mouseStartX = event.clientX;
+        var mouseStartY = event.clientY;
+        //    box初始位置
+        var boxStartX = box.offsetLeft;//但这个offset大小比absolute多了自己的margin,所以如果要把offset作为absolute计算中的一部分时，记得减去margin
+        var boxStartY = box.offsetTop;//这是视频里边没注意到的一点！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！
+        var computedStyle = window.getComputedStyle ? getComputedStyle(box, null) : box.currentStyle;//！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！
+        console.log(computedStyle);
+        var marLeft = Number(computedStyle.marginLeft.slice(0, -2));
+        console.log(marLeft);//带有px，所以用的时候记得去掉！！！！！！！！！！！！！！！！！！！用字符串的方法去掉px
+        var marTop = Number(computedStyle.marginTop.slice(0, -2));
+
+        //ie的全局捕获，！！鼠标！！的所有事件行为都被捕获到该元素身上!!!!!!!!!!!!!!!!!!!!
+        box.setCapture && box.setCapture();
+
+        //鼠标开始移动了
+        document.onmousemove = function (event) {//鼠标动一下就会触发onmousemove
+            //拿到鼠标现在的位置
+            event = event || window.event;
+            var mouseEndX = event.clientX;
+            var mouseEndY = event.clientY;
+            //计算鼠标移动距离
+            var disX = mouseEndX - mouseStartX;
+            var disY = mouseEndY - mouseStartY;
+            //计算盒子位置
+            var boxEndX = boxStartX + disX - marLeft;//这个endX是用来做absolute定位的.
+            // ！！！！！！！！！！！！！！！刚开始没注意到marLeft和marTop是字符串，但没出错，是因为一直用它来做减法，而他又是纯数字的字符串，就会自动转化
+            var boxEndY = boxStartY + disY - marTop;
+            // var boxEndX = boxStartX + disX;
+            // var boxEndY = boxStartY + disY
+
+            //判断盒子是否超出临界值
+            if (boxEndX < -marLeft) {
+                boxEndX = -marLeft;
+            } else if (boxEndX > document.documentElement.clientWidth - box.offsetWidth - marLeft) {//前提是html没有border
+                boxEndX = document.documentElement.clientWidth - box.offsetWidth - marLeft;
+            }
+            if (boxEndY < -marTop) {
+                boxEndY = -marTop;
+            } else if (boxEndY > document.documentElement.clientHeight - box.offsetHeight - marTop) {//前提是html没有border
+                boxEndY = document.documentElement.clientHeight - box.offsetHeight - marTop;
+            }
+
+
+            box.style.left = boxEndX + 'px';
+            box.style.top = boxEndY + 'px';
+
+            //碰撞问题是在设置完left top后判断的
+            // console.log(typeof marTop);
+            var boxR = boxEndX + box.offsetWidth + marLeft;//盒子右边距视口的距离
+            // console.log(typeof (boxEndX + box.offsetWidth));
+            // console.log(typeof boxR);
+            var boxL = boxEndX + marLeft;
+            var boxB = boxEndY + box.offsetHeight + marTop;
+            var boxT = boxEndY + marTop;
+            var imgR = imgNode.getBoundingClientRect().left + imgNode.offsetWidth;//图片有边距视口的距离
+            var imgL = imgNode.getBoundingClientRect().left;
+            var imgB = imgNode.getBoundingClientRect().top + imgNode.offsetHeight;
+            var imgT = imgNode.getBoundingClientRect().top;
+            if(boxR < imgL || boxL > imgR || boxB < imgT || boxT > imgB){
+                imgNode.src = '../11day/img/2.jpg';
+            }
+            else {
+                imgNode.src = '../11day/img/3.jpg';
+            }
+            // var boxL = boxEndX + box.offsetWidth;
+            // var boxT = boxEndY + box.offsetHeight;
+            // var boxR = boxEndX;
+            // var boxB = boxEndY;
+            // var imgL = imgNode.getBoundingClientRect().left;
+            // var imgT = imgNode.getBoundingClientRect().top;
+            // var imgR = imgNode.getBoundingClientRect().left + imgNode.offsetWidth;
+            // var imgB = imgNode.getBoundingClientRect().top + imgNode.offsetHeight;
+            //
+            // if(boxL < imgL || boxT < imgT || boxR > imgR || boxB > imgB){
+            //     imgNode.src = '../11day/img/2.jpg';
+            // }else{
+            //     imgNode.src = '../11day/img/3.jpg';
+            // }
+        }
+        //！！！！解绑鼠标move,否则，鼠标抬起后，盒子照样跟着鼠标!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        document.onmouseup = function () {
+            document.onmousemove = null;
+            document.onmouseup = null;
+            //    释放捕获!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+            box.releaseCapture && box.releaseCapture();
+        }
+        //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        //把onmousemove和onmouseup加在box上的话，当鼠标移动过快导致鼠标移到了非box区域的话，
+        //此时的onmousemove事件就加在了别的元素上（比如document上），box就不会跟随鼠标了，即使鼠标抬起
+        //这个事件也不是在box上发生的，也就是说即使在外边把鼠标抬起了，但当鼠标再次移入box时，box依然会跟随鼠标。
+        //所以，应该把onmousemove和onmouseup都加到document上。
+
+        //当元素内部有文本，我们ctrl+a选中文本，发现文本可以被拖拽，这是浏览器默认行为！！！！！！！！！！！！！！！！！！！！！！！！！！！！！
+        //dom0取消浏览器的默认行为
+        return false;
+        //dom2取消浏览器的默认行为
+        // event.preventDefault();
+        //但是低版本的ie的默认行为不包括这个拖拽,要用全局捕获
+    }
+</script>
+</body>
+</html>
+<!--
+拖拽总结！！！！！！！！！！！！！！！！！！！！！！！
+1.做了box拖拽
+2.修改了鼠标抬起依然移动
+3.优化鼠标快速移动后移出box
+4.取消浏览器的默认行为，针对ie低版本增加全局捕获
+5.设置移动边界
+6.设置碰撞
+-->
