@@ -80,7 +80,7 @@ for(in)：对象
 
 **undefined == null** :true
 
-**！！！！！！！！！！！！！！！！！！！‘   ’==0，'   '==false，空白串（‘    ’）强转化为Boolean值为true**
+<span style="color:red">**！！！！！！！！！！！！！！！！！！！‘   ’==0，'   '==false，空白串（‘    ’）强转化为Boolean值为true**</span>
 
 **算术运算、条件运算和逻辑运算情况分类：**
 
